@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "./src",                                  /* Specify the base directory to resolve non-relative module names. */
+    "paths": {
+      "@shared/*": [
+        "./@shared/*"
+      ],
+      "@user/*": [
+        "./user/*"
+      ]
+    },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
+    "outDir": "./dist",   
+    "plugins": [
+      // Transform paths in output .js files
+      { "transform": "typescript-transform-paths" },
+
+      // Transform paths in output .d.ts files (Include this line if you output declarations files)
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ]                                
+  },
+  "include": ["./src/"]
+}

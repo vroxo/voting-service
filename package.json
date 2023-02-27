@@ -1,0 +1,28 @@
+{
+  "name": "service-template",
+  "version": "1.0.0",
+  "description": "Template to create a new services",
+  "main": "index.js",
+  "workspaces":[
+    "./src/core",
+    "./src/interface"
+  ],
+  "scripts": {
+    "core:install": "npm install -w @service-template/core",
+    "interface:install": "npm install -w @service-template/interface",
+    "prestart:dev": "npm run build -w @service-template/core",
+    "start:dev": "npm run build:w -w @service-template/core & npm run start:dev -w @service-template/interface",
+    "test": "jest",
+    "test:cov": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/continuumsaturno/template-service.git"
+  },
+  "author": "Vitor Roxo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://bitbucket.org/continuumsaturno/template-service/issues"
+  },
+  "homepage": "https://bitbucket.org/continuumsaturno/template-service#readme"
+}
