@@ -1,4 +1,4 @@
-import { ClassValidatorFields } from '../../../@shared/domain/validators/class-validator-fields';
+import { ClassValidatorFields } from '../../../@shared/infra/validator/class-validator/class-validator-fields';
 import {
   IsBoolean,
   IsDate,
@@ -8,7 +8,7 @@ import {
   IsString,
   MaxLength,
 } from 'class-validator';
-import { UserProperties } from '../entities/user';
+import { UserProperties } from '../entity/user';
 
 export class UserRules {
   @MaxLength(255)

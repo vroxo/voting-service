@@ -3,17 +3,22 @@
   "version": "1.0.0",
   "description": "Template to create a new services",
   "main": "index.js",
-  "workspaces":[
+  "workspaces": [
     "./src/core",
     "./src/interface"
   ],
   "scripts": {
+    "build": "npm run core:build && npm run interface:build",
     "core:install": "npm install -w @service-template/core",
+    "core:build": "npm run build -w @service-template/core",
+    "core:cti": "npm run cti:make -w @service-template/core",
     "interface:install": "npm install -w @service-template/interface",
-    "prestart:dev": "npm run build -w @service-template/core",
+    "interface:build": "npm run build -w @service-template/interface",
+    "prestart:dev": "npm run core:build",
     "start:dev": "npm run build:w -w @service-template/core & npm run start:dev -w @service-template/interface",
     "test": "jest",
-    "test:cov": "jest --coverage"
+    "test:cov": "jest --coverage",
+    "start": "npm run start -w @service-template/interface"
   },
   "repository": {
     "type": "git",

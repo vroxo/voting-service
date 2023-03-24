@@ -1,4 +1,4 @@
-import ClassValidatorFields from '../validators/class-validator-fields';
+import ClassValidatorFields from '../../infra/validator/class-validator/class-validator-fields';
 import { FieldErrors } from '../validators/validator-fields-interface';
 import { EntityValidationError } from '../errors/validation.error';
 import { objectContaining } from 'expect';

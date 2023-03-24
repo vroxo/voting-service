@@ -6,6 +6,7 @@
   "exports": {
     "./@shared/application": "./dist/@shared/application/index.js",
     "./@shared/domain": "./dist/@shared/domain/index.js",
+    "./@shared/infra": "./dist/@shared/infra/index.js",
     "./user/application": "./dist/user/application/index.js",
     "./user/domain": "./dist/user/domain/index.js",
     "./user/infra": "./dist/user/infra/index.js"
@@ -17,6 +18,9 @@
       ],
       "@shared/domain": [
         "./dist/@shared/domain/index.d.ts"
+      ],
+      "@shared/infra": [
+        "./dist/@shared/infra/index.d.ts"
       ],
       "user/application": [
         "./dist/user/application/index.d.ts"
@@ -30,7 +34,6 @@
     }
   },
   "scripts": {
-    
     "ttsc": "ttsc",
     "ts-node": "ts-node",
     "tsc": "tsc",
@@ -60,7 +63,14 @@
     "typescript-transform-paths": "^3.4.6"
   },
   "dependencies": {
+    "@aws-sdk/client-sqs": "^3.298.0",
+    "@nestjs/platform-socket.io": "^9.3.12",
+    "@nestjs/websockets": "^9.3.12",
     "class-validator": "^0.14.0",
+    "compression": "^1.7.4",
+    "pino": "^8.11.0",
+    "sqs-consumer": "^7.0.3",
+    "typeorm": "^0.3.12",
     "uuid": "^9.0.0"
   }
 }

@@ -3,7 +3,7 @@ import {
   EntityValidationError,
   UniqueEntityId,
 } from '../../../@shared/domain';
-import { UserValidatorFactory } from '../validators/user.validator';
+import { UserValidatorFactory } from '../validator/user.validator';
 
 export type UserProperties = {
   name: string;

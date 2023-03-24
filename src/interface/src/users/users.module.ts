@@ -1,25 +1,15 @@
 import { Module } from '@nestjs/common';
-import { UsersService } from './users.service';
+import { PinoLoggerAdapter } from '@service-template/core/@shared/infra';
 import { UsersController } from './users.controller';
-import { UserInMemoryRepository } from '@service-template/core/user/infra';
-import { CreateUserUseCase } from '@service-template/core/user/application';
-import { UserRepository } from '@service-template/core/user/domain';
+import { USERS_PROVIDERS } from './users.provider';
 
 @Module({
   controllers: [UsersController],
   providers: [
-    UsersService,
-    {
-      provide: 'UserRepository',
-      useClass: UserInMemoryRepository,
-    },
-    {
-      provide: CreateUserUseCase.UseCase,
-      useFactory: (repo: UserRepository.Repository) => {
-        return new CreateUserUseCase.UseCase(repo);
-      },
-      inject: ['UserRepository'],
-    },
+    PinoLoggerAdapter,
+    USERS_PROVIDERS.GATEWAYS.WEB_SOCKET_GATEWAY,
+    ...Object.values(USERS_PROVIDERS.REPOSITORIES),
+    ...Object.values(USERS_PROVIDERS.USE_CASES),
   ],
 })
 export class UsersModule {}

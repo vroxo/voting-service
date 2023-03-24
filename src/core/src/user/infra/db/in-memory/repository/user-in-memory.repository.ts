@@ -1,5 +1,5 @@
 import { InMemorySearchableRepository, SortDirection } from '@shared/domain';
-import { User } from '@user/domain/entities/user';
+import { User } from '@user/domain/entity/user';
 import { UserRepository } from '@user/domain/repository/user.repository';
 
 export class UserInMemoryRepository

@@ -3,7 +3,7 @@ import {
   SearchParams as DefaultSearchParams,
   SearchResult as DefaultSearchResult,
 } from '@shared/domain';
-import { User } from '../entities/user';
+import { User } from '../entity/user';
 
 export namespace UserRepository {
   export type Filter = string;
