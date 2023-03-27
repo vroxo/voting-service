@@ -18,7 +18,10 @@ export class UsersController {
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    return this.createUserUseCase.execute({ name: 'Vitor' });
+    return this.createUserUseCase.execute({
+      name: 'Vitor',
+      email: 'teste@test.com',
+    });
   }
 
   // @Get()

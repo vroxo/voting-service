@@ -1,12 +1,23 @@
-import { userSchema } from '@service-template/core/user/infra';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DATABASE_CONFIG } from './config/database.config';
+import { ConfigService } from '@nestjs/config';
+import { CONFIG_SCHEMA_TYPE } from 'src/config/config.module';
+import { DATABASE_PROVIDER } from './database.provider';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(DATABASE_CONFIG),
-    TypeOrmModule.forFeature([userSchema]),
+    TypeOrmModule.forRootAsync({
+      useFactory: async (config: ConfigService<CONFIG_SCHEMA_TYPE>) => {
+        return {
+          type: 'postgres',
+          url: config.get<CONFIG_SCHEMA_TYPE['DB_URL']>('DB_URL'),
+          entities: [...DATABASE_PROVIDER.SCHEMAS],
+          migrations: [__dirname + '/config/migrations/**/*{.ts,.js}'],
+          synchronize: true,
+        };
+      },
+      inject: [ConfigService],
+    }),
   ],
   exports: [TypeOrmModule],
 })

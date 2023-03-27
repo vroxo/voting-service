@@ -5,5 +5,5 @@ export const DATABASE_CONFIG: any = {
   url: 'postgres://postgres:postgres@localhost:5432/users-db',
   entities: [...DATABASE_PROVIDER.SCHEMAS],
   migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
-  synchronize: false,
+  synchronize: true,
 };

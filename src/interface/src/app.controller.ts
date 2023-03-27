@@ -1,15 +1,16 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { User } from '@service-template/core/user/domain';
-
+import { ConfigService } from '@nestjs/config';
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private configService: ConfigService,
+    private readonly appService: AppService,
+  ) {}
 
   @Get()
   getHello(): string {
-    const user = new User({ name: 'Vitor' });
-    console.log(user.props);
+    console.log(this.configService.get('DB_URL'));
     return this.appService.getHello();
   }
 }

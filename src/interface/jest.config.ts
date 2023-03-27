@@ -12,4 +12,5 @@ export default {
   collectCoverageFrom: ['**/*.(t|j)s'],
   coverageDirectory: '../coverage',
   testEnvironment: 'node',
+  setupFilesAfterEnv: ['../../core/src/@shared/domain/tests/jest.ts'],
 };

@@ -35,13 +35,13 @@ export default {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
-  coverageProvider: "v8",
+  coverageProvider: 'v8',
 
   // A list of reporter names that Jest uses when writing coverage reports
   coverageReporters: [
-    "json",
-    "html",
-    "text",
+    'json',
+    'html',
+    'text',
     // "lcov",
     // "clover"
   ],
@@ -126,7 +126,7 @@ export default {
   // restoreMocks: false,
 
   // The root directory that Jest should scan for tests and modules within
-  rootDir: "src",
+  rootDir: 'src',
 
   // A list of paths to directories that Jest should use to search for files in
   // roots: [
@@ -140,7 +140,10 @@ export default {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ["./@shared/domain/tests/validations.ts"],
+  setupFilesAfterEnv: [
+    './@shared/domain/tests/validations.ts',
+    './@shared/domain/tests/jest.ts',
+  ],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
@@ -169,7 +172,7 @@ export default {
   // ],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
-  testRegex: ".*\\..*spec\\.ts$",
+  testRegex: '.*\\..*spec\\.ts$',
 
   // This option allows the use of a custom results processor
   // testResultsProcessor: undefined,
@@ -185,7 +188,7 @@ export default {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    "^.+\\.ts?$": ["@swc/jest"]
+    '^.+\\.ts?$': ['@swc/jest'],
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
