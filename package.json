@@ -1,33 +1,36 @@
 {
-  "name": "service-template",
+  "name": "voting-service",
   "version": "1.0.0",
-  "description": "Template to create a new services",
+  "description": "Voting service",
   "main": "index.js",
   "workspaces": [
     "./src/core",
-    "./src/interface"
+    "./src/api"
   ],
   "scripts": {
-    "build": "npm run core:build && npm run interface:build",
-    "core:install": "npm install -w @service-template/core",
-    "core:build": "npm run build -w @service-template/core",
-    "core:cti": "npm run cti:make -w @service-template/core",
-    "interface:install": "npm install -w @service-template/interface",
-    "interface:build": "npm run build -w @service-template/interface",
+    "build": "npm run core:build && npm run api:build",
+    "core:install": "npm install -w @voting-service/core",
+    "core:build": "npm run build -w @voting-service/core",
+    "core:cti": "npm run cti:make -w @voting-service/core",
+    "api:install": "npm install -w @voting-service/api",
+    "api:build": "npm run build -w @voting-service/api",
     "prestart:dev": "npm run core:build",
-    "start:dev": "npm run build:w -w @service-template/core & npm run start:dev -w @service-template/interface",
+    "start:dev": "npm run build:w -w @voting-service/core & npm run start:dev -w @voting-service/api",
     "test": "jest",
     "test:cov": "jest --coverage",
-    "start": "npm run start -w @service-template/interface"
+    "start": "npm run start -w @voting-service/api",
+    "migrate:generate": "npm run typeorm:migrate -w @voting-service/api",
+    "migrate": "npm run typeorm:run -w @voting-service/api",
+    "seed": "npm run seed -w @voting-service/api"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/continuumsaturno/template-service.git"
+    "url": "git+https://github.com/vroxo/desafio-votacao-2.0.git"
   },
   "author": "Vitor Roxo",
   "license": "MIT",
   "bugs": {
-    "url": "https://bitbucket.org/continuumsaturno/template-service/issues"
+    "url": "https://github.com/vroxo/desafio-votacao-2.0/issues"
   },
-  "homepage": "https://bitbucket.org/continuumsaturno/template-service#readme"
+  "homepage": "https://github.com/vroxo/desafio-votacao-2.0#readme"
 }

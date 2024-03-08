@@ -1,39 +1,67 @@
-import { default as DefaultUseCase } from '@shared/application/use-cases/use-case';
+import { Auth, AuthProperties, AuthRepository } from '@auth/domain';
+import { UseCase } from '@shared/application';
 import { LoggerAdapter } from '@shared/domain';
-import { User, UserRepository } from '@user/domain';
+import { User, UserProperties, UserRepository } from '@user/domain';
+import { hash } from 'bcrypt';
 
-export namespace CreateUserUseCase {
-  export class UseCase implements DefaultUseCase<Input, Output> {
-    private repo: UserRepository.Repository;
-    private logger: LoggerAdapter;
+export class CreateUserUseCase implements UseCase<Input, Output> {
+  private logger: LoggerAdapter;
+  private userRepository: UserRepository;
+  private authRepository: AuthRepository;
 
-    constructor(logger: LoggerAdapter, repo: UserRepository.Repository) {
-      this.logger = logger;
-      this.repo = repo;
-    }
-
-    async execute(input: Input): Promise<Output> {
-      this.logger.info({ msg: 'Creating user...', input });
-      const entity = new User(input);
-      await this.repo.insert(entity);
-      this.logger.info({ msg: 'User created!', user: entity.toJSON() });
-      return entity.toJSON();
-    }
+  constructor(
+    logger: LoggerAdapter,
+    userRepository: UserRepository,
+    authRepository: AuthRepository,
+  ) {
+    this.logger = logger;
+    this.userRepository = userRepository;
+    this.authRepository = authRepository;
   }
 
-  export type Input = {
-    name: string;
-    email?: string;
-    is_active?: boolean;
-  };
+  async execute({ credentials, ...input }: Input): Promise<Output> {
+    try {
+      this.logger.info({ msg: 'Creating a new User.', data: { ...input } });
+      const user = User.create({ ...input, cpf: input.cpf.replace(/\D/g, '') });
+      await this.userRepository.insert(user);
+      const userOutput = user.toJSON();
+      this.logger.info({ msg: 'User created!', data: userOutput });
 
-  export type Output = {
-    id: string;
-    name: string;
-    email: string | null;
-    is_active: boolean;
-    created_at: Date;
-  };
+      this.logger.info({
+        msg: 'Creating credentials to user.',
+        data: { username: credentials.username },
+      });
+
+      const hashPassword = await hash(credentials.password, 10);
+
+      const auth = Auth.create({
+        ...credentials,
+        password: hashPassword,
+        user,
+      });
+
+      await this.authRepository.insert(auth);
+      const authOutput = auth.toJSON();
+
+      delete authOutput.password;
+      delete authOutput.user;
+
+      this.logger.info({
+        msg: 'Credentials created.',
+        data: authOutput,
+      });
+
+      return { ...userOutput, credentials: authOutput };
+    } catch (error: any) {
+      this.logger.error(error);
+      throw error;
+    }
+  }
 }
 
-export default CreateUserUseCase;
+type Input = UserProperties & {
+  credentials: AuthProperties;
+};
+type Output = { id: string } & UserProperties & {
+    credentials: Omit<AuthProperties, 'password'>;
+  };

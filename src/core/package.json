@@ -1,5 +1,5 @@
 {
-  "name": "@service-template/core",
+  "name": "@voting-service/core",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,19 @@
     "./@shared/infra": "./dist/@shared/infra/index.js",
     "./user/application": "./dist/user/application/index.js",
     "./user/domain": "./dist/user/domain/index.js",
-    "./user/infra": "./dist/user/infra/index.js"
+    "./user/infra": "./dist/user/infra/index.js",
+    "./topic/application": "./dist/topic/application/index.js",
+    "./topic/domain": "./dist/topic/domain/index.js",
+    "./topic/infra": "./dist/topic/infra/index.js",
+    "./session/application": "./dist/session/application/index.js",
+    "./session/domain": "./dist/session/domain/index.js",
+    "./session/infra": "./dist/session/infra/index.js",
+    "./vote/application": "./dist/vote/application/index.js",
+    "./vote/domain": "./dist/vote/domain/index.js",
+    "./vote/infra": "./dist/vote/infra/index.js",
+    "./auth/application": "./dist/auth/application/index.js",
+    "./auth/domain": "./dist/auth/domain/index.js",
+    "./auth/infra": "./dist/auth/infra/index.js"
   },
   "typesVersions": {
     ">=4.0": {
@@ -30,6 +42,42 @@
       ],
       "user/infra": [
         "./dist/user/infra/index.d.ts"
+      ],
+      "topic/application": [
+        "./dist/topic/application/index.d.ts"
+      ],
+      "topic/domain": [
+        "./dist/topic/domain/index.d.ts"
+      ],
+      "topic/infra": [
+        "./dist/topic/infra/index.d.ts"
+      ],
+      "session/application": [
+        "./dist/session/application/index.d.ts"
+      ],
+      "session/domain": [
+        "./dist/session/domain/index.d.ts"
+      ],
+      "session/infra": [
+        "./dist/session/infra/index.d.ts"
+      ],
+      "vote/application": [
+        "./dist/vote/application/index.d.ts"
+      ],
+      "vote/domain": [
+        "./dist/vote/domain/index.d.ts"
+      ],
+      "vote/infra": [
+        "./dist/vote/infra/index.d.ts"
+      ],
+      "auth/application": [
+        "./dist/auth/application/index.d.ts"
+      ],
+      "auth/domain": [
+        "./dist/auth/domain/index.d.ts"
+      ],
+      "auth/infra": [
+        "./dist/auth/infra/index.d.ts"
       ]
     }
   },
@@ -51,6 +99,7 @@
   "devDependencies": {
     "@swc/core": "^1.3.35",
     "@swc/jest": "^0.2.24",
+    "@types/bcrypt": "^5.0.2",
     "@types/jest": "^27.4.0",
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.13.0",
@@ -66,9 +115,14 @@
     "@aws-sdk/client-sqs": "^3.298.0",
     "@nestjs/platform-socket.io": "^9.3.12",
     "@nestjs/websockets": "^9.3.12",
-    "class-validator": "^0.14.0",
+    "bcrypt": "^5.1.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
     "compression": "^1.7.4",
+    "cpf-cnpj-validator": "^1.0.3",
+    "date-fns-tz": "^2.0.0",
     "dotenv": "^16.0.3",
+    "jsonwebtoken": "^9.0.2",
     "pino": "^8.11.0",
     "sqs-consumer": "^7.0.3",
     "typeorm": "^0.3.12",

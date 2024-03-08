@@ -1,38 +1,36 @@
 version: '3'
 services:
-  application:
-    container_name: app
-    build:
-      context: .
-      target: development
-    command: npm run start:dev
-    # env_file:
-    #   - .env
-    restart: always
-    volumes:
-      - .:/usr/src/app
-    ports:
-      - 3000:3000
-    networks:
-      - network
-    depends_on:
-      - postgresdb
-
+  # application:
+  #   container_name: app
+  #   build:
+  #     context: .
+  #     target: development
+  #   command: npm run start:dev
+  #   # env_file:
+  #   #   - .env
+  #   restart: always
+  #   volumes:
+  #     - .:/usr/src/app
+  #   ports:
+  #     - 3000:3000
+  #   networks:
+  #     - network
+  #   depends_on:
+  #     - postgresdb
   postgresdb:
     image: postgres:alpine
-    container_name: postgresdb
+    container_name: voting-service-db
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=users-db
+      - POSTGRES_DB=voting-service-db
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - network
     ports:
-      - 5432:5432
+      - 5435:5432
     restart: always
-
 networks:
   network:
 volumes:

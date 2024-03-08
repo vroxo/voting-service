@@ -1,21 +1,4 @@
-import {
-  SearchableRepositoryInterface,
-  SearchParams as DefaultSearchParams,
-  SearchResult as DefaultSearchResult,
-} from '@shared/domain';
-import { User } from '../entity/user';
+import { RepositoryInterface } from '@shared/domain';
+import { User } from '../entity/user.entity';
 
-export namespace UserRepository {
-  export type Filter = string;
-
-  export type SearchParams = DefaultSearchParams<Filter>;
-
-  export type SearchResult = DefaultSearchResult<User, Filter>;
-
-  export type Repository = SearchableRepositoryInterface<
-    User,
-    Filter,
-    SearchParams,
-    SearchResult
-  >;
-}
+export type UserRepository = RepositoryInterface<User>;

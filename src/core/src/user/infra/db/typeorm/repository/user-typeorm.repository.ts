@@ -17,7 +17,7 @@ export class UserTypeORMRepository implements RepositoryInterface<User> {
 
   async insert(entity: User): Promise<void> {
     const user = this.typeOrmRepository.create(entity);
-    this.typeOrmRepository.save(user);
+    await this.typeOrmRepository.save(user);
   }
 
   async findAll(): Promise<User[]> {
@@ -30,11 +30,15 @@ export class UserTypeORMRepository implements RepositoryInterface<User> {
     if (id instanceof UniqueEntityId)
       options = { where: { id: id.toString() } };
 
-    return this.typeOrmRepository.findOne(options);
+    const user = await this.typeOrmRepository.findOne(options);
+
+    if (user) {
+      return User.create(user, new UniqueEntityId(user.id as string));
+    }
   }
 
   async update(entity: User): Promise<void> {
-    this.typeOrmRepository.save(entity);
+    await this.typeOrmRepository.save(entity);
   }
 
   async delete(id: string | UniqueEntityId): Promise<void> {
