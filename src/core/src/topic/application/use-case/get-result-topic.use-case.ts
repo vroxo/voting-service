@@ -21,6 +21,7 @@ export class GetResultTopicUseCase implements UseCase<Input, Output> {
       const votes = { yes: 0, no: 0 };
 
       const topic = await this.topicRepository.findById(id);
+      console.log('topic', topic);
 
       if (!topic) throw new TopicNotFoundError();
 
@@ -34,7 +35,7 @@ export class GetResultTopicUseCase implements UseCase<Input, Output> {
       this.logger.info({
         msg: 'Counting topic results.',
       });
-
+      console.log('sessions', sessions);
       for (const session of sessions) {
         const { votes: session_votes } = session;
 

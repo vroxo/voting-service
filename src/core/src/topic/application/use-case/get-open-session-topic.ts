@@ -33,7 +33,6 @@ export class GetOpenSessionTopicUseCase implements UseCase<Input, Output> {
 
     topic.sessions.forEach((session) => {
       const entity = Session.create(session, new UniqueEntityId(session.id));
-      console.log('entity', entity.status);
       sessions.push(entity);
     });
 
